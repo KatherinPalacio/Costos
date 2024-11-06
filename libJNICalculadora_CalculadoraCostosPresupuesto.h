@@ -9,18 +9,18 @@ extern "C" {
 #endif
 /*
  * Class:     libJNICalculadora_CalculadoraCostosPresupuesto
- * Method:    calcularPrecioVentaAbsorcion
+ * Method:    precioVentaAbsor
  * Signature: (DDDDD)D
  */
-JNIEXPORT jdouble JNICALL Java_libJNICalculadora_CalculadoraCostosPresupuesto_calcularPrecioVentaAbsorcion
+JNIEXPORT jdouble JNICALL Java_libJNICalculadora_CalculadoraCostosPresupuesto_precioVentaAbsor
   (JNIEnv *, jobject, jdouble, jdouble, jdouble, jdouble, jdouble);
 
 /*
  * Class:     libJNICalculadora_CalculadoraCostosPresupuesto
- * Method:    calcularPrecioVentaDirecto
+ * Method:    precioVentaDir
  * Signature: (DDDDD)D
  */
-JNIEXPORT jdouble JNICALL Java_libJNICalculadora_CalculadoraCostosPresupuesto_calcularPrecioVentaDirecto
+JNIEXPORT jdouble JNICALL Java_libJNICalculadora_CalculadoraCostosPresupuesto_precioVentaDir
   (JNIEnv *, jobject, jdouble, jdouble, jdouble, jdouble, jdouble);
 
 #ifdef __cplusplus

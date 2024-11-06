@@ -1,50 +1,37 @@
-
 package libJNICalculadora;
-
-import java.util.Scanner;
 
 public class CalculadoraCostosPresupuesto {
 
-    // Carga la biblioteca nativa
+    // Cargar la librería nativa
     static {
-        System.loadLibrary("calpresupuesto");
+        System.loadLibrary("calculadoracostos"); // Nombre del archivo .so sin la extensión
     }
 
-    // Métodos nativos en C
-    public native double calcularPrecioVentaAbsorcion(double materiaPrima, double mod, double cifVariables, double cifFijos, double porcentajeUtilidad);
-    public native double calcularPrecioVentaDirecto(double materiaPrima, double mod, double cifVariables, double gastosVentasVariables, double porcentajeUtilidad);
+    // Declaración de los métodos nativos
+    public native double precioVentaAbsor(double matPrima, double mod, double cifVar, double cifFijo, double porcUtil);
+    public native double precioVentaDir(double matPrima, double mod, double cifVar, double gastosVar, double porcUtil);
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        // Crear una instancia de la clase
+        CalculadoraCostosPresupuesto calculadora = new CalculadoraCostosPresupuesto();
 
-        // Entradas del usuario
-        System.out.print("Ingrese el costo de la Materia Prima: ");
-        double materiaPrima = scanner.nextDouble();
+        // Valores de prueba para calcular el precio de venta con costeo por absorción
+        double matPrima = 100.0;
+        double mod = 50.0;
+        double cifVar = 20.0;
+        double cifFijo = 30.0;
+        double porcUtil = 0.25; // 25%
 
-        System.out.print("Ingrese el costo de Mano de Obra Directa (M.O.D): ");
-        double mod = scanner.nextDouble();
+        // Calcular precio de venta con costeo por absorción
+        double precioAbsorcion = calculadora.precioVentaAbsor(matPrima, mod, cifVar, cifFijo, porcUtil);
+        System.out.println("Precio de venta (Costeo por Absorción): " + precioAbsorcion);
 
-        System.out.print("Ingrese los Costos Indirectos de Fabricación (C.I.F.) Variables: ");
-        double cifVariables = scanner.nextDouble();
+        // Valores de prueba para calcular el precio de venta con costeo directo
+        double gastosVar = 10.0;
 
-        System.out.print("Ingrese el porcentaje de utilidad (como decimal): ");
-        double porcentajeUtilidad = scanner.nextDouble();
-
-        // Instancia del calculador
-         CalculadoraCostosPresupuesto calculadora = new  CalculadoraCostosPresupuesto ();
-
-        // Calculo de Costeo por Absorción
-        System.out.print("Ingrese los Costos Indirectos de Fabricación (C.I.F.) Fijos: ");
-        double cifFijos = scanner.nextDouble();
-        double precioVentaAbsorcion = calculadora.calcularPrecioVentaAbsorcion(materiaPrima, mod, cifVariables, cifFijos, porcentajeUtilidad);
-        System.out.printf("Precio de Venta (Costeo por Absorción): %.2f%n", precioVentaAbsorcion);
-
-        // Calculo de Costeo Directo
-        System.out.print("Ingrese los Gastos de Ventas Variables: ");
-        double gastosVentasVariables = scanner.nextDouble();
-        double precioVentaDirecto = calculadora.calcularPrecioVentaDirecto(materiaPrima, mod, cifVariables, gastosVentasVariables, porcentajeUtilidad);
-        System.out.printf("Precio de Venta (Costeo Directo): %.2f%n", precioVentaDirecto);
-
-        scanner.close();
+        // Calcular precio de venta con costeo directo
+        double precioDirecto = calculadora.precioVentaDir(matPrima, mod, cifVar, gastosVar, porcUtil);
+        System.out.println("Precio de venta (Costeo Directo): " + precioDirecto);
     }
 }
+
